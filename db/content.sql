@@ -42,7 +42,7 @@ insert into t_user values
 'dhMTBkzwDKxnD;4KNs,4ENy', 'ROLE_USER');
 
 insert into t_comment values
-(1, 'John Doe', 'Great! keep up the good work.', 1, 1);
+(1, 'Great! keep up the good work.', 1, 1);
 
 insert into t_comment values
-(2, 'Ann Yone', "Thank you, I'll try my best.", 1, 2);
+(2, "Thank you, I'll try my best.", 1, 2);

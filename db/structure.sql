@@ -20,7 +20,6 @@ create table t_user (
 
 create table t_comment (
     com_id integer not null primary key auto_increment,
-    com_author varchar(100) not null,
     com_content varchar(500) not null,
     art_id integer not null,
     usr_id integer not null,
