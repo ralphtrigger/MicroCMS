@@ -23,7 +23,7 @@ class Comment {
     /**
      * Comment author.
      * 
-     * @var string
+     * @var MicroCMS/Domain/User
      */
     private $author;
     /**
@@ -59,7 +59,7 @@ class Comment {
         $this->id = $id;
     }
 
-    public function setAuthor($author) {
+    public function setAuthor(User $author) {
         $this->author = $author;
     }
 

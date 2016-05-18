@@ -30,8 +30,19 @@ insert into t_article values
   pour en avoir de plus grandes, et de savoir supporter des douleurs légères pour
   en éviter de plus fâcheuses.");
 
-insert into t_comment values
-(1, 'John Doe', 'Great! keep up the good work.', 1);
+/* raw password is 'john' */
+insert into t_user values
+(1, 'JohnDoe', 
+'L2nNR5hIcinaJkKR+j4baYaZjcHS0c3WX2gjYF6Tmgl1Bs+C9Qbr+69X8eQwXDvw0vp73PrcSeT0bGEW5+T2hA==', 
+'YcM=A$nsYzkyeDVjEUa7W9K', 'ROLE_USER');
+/* raw password is 'jane' */
+insert into t_user values
+(2, 'JaneDoe', 
+'EfakNLxyhHy2hVJlxDmVNl1pmgjUZl99gtQ+V3mxSeD8IjeZJ8abnFIpw9QNahwAlEaXBiQUBLXKWRzOmSr8HQ==', 
+'dhMTBkzwDKxnD;4KNs,4ENy', 'ROLE_USER');
 
 insert into t_comment values
-(2, "Ann Yone", "Thank you, I'll try my best.", 1);
+(1, 'John Doe', 'Great! keep up the good work.', 1, 1);
+
+insert into t_comment values
+(2, 'Ann Yone', "Thank you, I'll try my best.", 1, 2);
