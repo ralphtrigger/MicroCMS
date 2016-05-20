@@ -10,6 +10,7 @@ use Silex\Provider\SessionServiceProvider;
 use Silex\Provider\TranslationServiceProvider;
 use Silex\Provider\TwigServiceProvider;
 use Silex\Provider\UrlGeneratorServiceProvider;
+use Silex\Provider\ValidatorServiceProvider;
 use Symfony\Component\Debug\ErrorHandler;
 use Symfony\Component\Debug\ExceptionHandler;
 
@@ -21,6 +22,11 @@ ExceptionHandler::register();
 $app->register(new DoctrineServiceProvider());
 $app->register(new TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../views',));
+$app['twig'] = $app->share($app->extend('twig', function(Twig_Environment $twig, $app){
+    $twig->addExtension(new Twig_Extensions_Extension_Text());
+    return $twig;
+}));
+$app->register(new ValidatorServiceProvider());
 $app->register(new UrlGeneratorServiceProvider());
 $app->register(new SessionServiceProvider());
 $app->register(new SecurityServiceProvider(), array(
@@ -34,6 +40,12 @@ $app->register(new SecurityServiceProvider(), array(
                 return new UserDAO($app['db']);
             }),
         ),
+    ),
+    'security.role_hierarchy' => array(
+        'ROLE_ADMIN' => array('ROLE_USER'),
+    ),
+    'security.access_rules' => array(
+        array('^/admin', 'ROLE_ADMIN'),
     ),
 ));
 $app->register(new FormServiceProvider());

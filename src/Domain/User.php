@@ -20,6 +20,7 @@ class User implements UserInterface
 
     /**
      * User name.
+     * 
      * @var string
      */
     private $username;
@@ -118,7 +119,7 @@ class User implements UserInterface
      */
     public function getRoles()
     {
-        return [$this->getRole()];
+        return array($this->getRole());
     }
 
 }

@@ -70,7 +70,7 @@ class CommentDAO extends DAO
 
         return $comments;
     }
-    
+
     public function save(Comment $comment)
     {
         $commentData = array(
@@ -78,8 +78,8 @@ class CommentDAO extends DAO
             'usr_id' => $comment->getAuthor()->getId(),
             'com_content' => $comment->getContent()
         );
-        
-        if($comment->getId()){
+
+        if ($comment->getId()) {
             // The comment has already been saved : update it
             $this->getDb()->update('t_comment', $commentData, array(
                 'com_id' => $comment->getId()
@@ -92,6 +92,77 @@ class CommentDAO extends DAO
             $id = $this->getDb()->lastInsertId();
             $comment->setId($id);
         }
+    }
+
+    /**
+     * Return a list of all comments, sorted by date (most recent first)
+     * 
+     * @return array A list of all comment.
+     */
+    public function findAll()
+    {
+        $sql = "select * from t_comment order by com_id desc";
+        $result = $this->getDb()->fetchAll($sql);
+
+        // convert query result to an array of domain object
+        $entities = array();
+        foreach ($result as $row) {
+            $id = $row['com_id'];
+            $entities[$id] = $this->buildDomainObject($row);
+        }
+
+        return $entities;
+    }
+
+    /**
+     * Remove all comments for an article.
+     * 
+     * @param int $articleId The id of the article.
+     */
+    public function deleteAllByArticle($articleId)
+    {
+        $this->getDb()->delete('t_comment', array('art_id' => $articleId));
+    }
+
+    /**
+     * Remove all comments for a user.
+     * 
+     * @param int $userId The id of the article.
+     */
+    public function deleteAllByUser($userId)
+    {
+        $this->getDb()->delete('t_comment', array('usr_id' => $userId));
+    }
+
+    /**
+     * Return a comment matchin the supplied id.
+     * 
+     * @param int $id The comment id.
+     * @return \MicroCMS\DAO\Comment 
+     * @throws Exception throw an exception if no matching comment is found
+     */
+    public function find($id)
+    {
+        $sql = "select * from t_comment where com_id=?";
+        $row = $this->getDb()->fetchAssoc($sql, [$id]);
+
+        if ($row) {
+            return $this->buildDomainObject($row);
+        }
+        else {
+            throw new \Exception("No comment matching id ".$id);
+        }
+    }
+
+    /**
+     * Remove a comment from the database.
+     * 
+     * @param int $id
+     */
+    public function delete($id)
+    {
+        // Delete the comment
+        $this->getDb()->delete('t_comment', array('com_id' => $id));
     }
 
     /**
