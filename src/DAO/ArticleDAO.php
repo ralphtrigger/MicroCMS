@@ -58,11 +58,11 @@ class ArticleDAO extends DAO
     public function save(Article $article)
     {
         $articleData = array(
-            'art_title' => $article->getTitle(),
+            'art_title'   => $article->getTitle(),
             'art_content' => $article->getContent(),
         );
-        
-        if($article->getId()){
+
+        if ($article->getId()) {
             // The article has already been saved : update it
             $this->getDb()->update('t_article', $articleData, array(
                 'art_id' => $article->getId()
@@ -76,13 +76,14 @@ class ArticleDAO extends DAO
             $article->setId($id);
         }
     }
-    
+
     /**
      * Delete an article from the data base.
      * 
      * @param int $id The article id.
      */
-    public function delete($id){
+    public function delete($id)
+    {
         // Delete the article
         $this->getDb()->delete('t_article', array('art_id' => $id));
     }

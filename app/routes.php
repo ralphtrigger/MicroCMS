@@ -35,15 +35,15 @@ $app->match('article/{id}', function ($id, Request $request) use ($app) {
     }
     $comments = $app['dao.comment']->findAllByArticle($id);
     return $app['twig']->render('article.html.twig', array(
-                'article' => $article,
-                'comments' => $comments,
+                'article'     => $article,
+                'comments'    => $comments,
                 'commentForm' => $commentFormView));
 })->bind('article');
 
 // Login form
 $app->get('/login', function(Request $request) use ($app) {
     return $app['twig']->render('login.html.twig', array(
-                'error' => $app['security.last_error']($request),
+                'error'         => $app['security.last_error']($request),
                 'last_username' => $app['session']->get('_security.last_username'),
     ));
 })->bind('login');
@@ -57,7 +57,7 @@ $app->get('/admin', function() use ($app) {
     return $app['twig']->render('admin.html.twig', array(
                 'articles' => $articles,
                 'comments' => $comments,
-                'users' => $users,
+                'users'    => $users,
     ));
 })->bind('admin');
 
@@ -72,7 +72,7 @@ $app->match('/admin/article/add', function(Request $request) use ($app) {
     }
 
     return $app['twig']->render('article_form.html.twig', array(
-                'title' => "New Article",
+                'title'       => "New Article",
                 'articleForm' => $articleForm->createView(),
     ));
 })->bind('admin_article_add');
@@ -88,7 +88,7 @@ $app->match('/admin/article/{id}/edit', function($id, Request $request) use ($ap
     }
 
     return $app['twig']->render('article_form.html.twig', array(
-                'title' => 'Edit article',
+                'title'       => 'Edit article',
                 'articleForm' => $articleForm->createView(),
     ));
 })->bind('admin_article_edit');
@@ -116,7 +116,7 @@ $app->match('/admin/comment/{id}/edit', function($id, Request $request) use ($ap
     }
 
     return $app['twig']->render('comment_form.html.twig', array(
-                'title' => 'Edit comment',
+                'title'       => 'Edit comment',
                 'commentForm' => $commentForm->createView(),
     ));
 })->bind('admin_comment_edit');
@@ -151,7 +151,7 @@ $app->match('/admin/user/add', function(Request $request) use ($app) {
     }
 
     return $app['twig']->render('user_form.html.twig', array(
-                'title' => 'New user',
+                'title'    => 'New user',
                 'userForm' => $userForm->createView()
     ));
 })->bind('admin_user_add');
@@ -173,7 +173,7 @@ $app->match('/admin/user/{id}/edit', function($id, Request $request) use ($app) 
     }
 
     return $app['twig']->render('user_form.html.twig', array(
-                'title' => 'Edit user',
+                'title'    => 'Edit user',
                 'userForm' => $userForm->createView(),
     ));
 })->bind('admin_user_edit');

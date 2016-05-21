@@ -1,4 +1,5 @@
 <?php
+
 namespace MicroCMS\Domain;
 
 /**
@@ -8,7 +9,6 @@ namespace MicroCMS\Domain;
  */
 class Article
 {
-
     /**
      * Article id.
      *
@@ -59,4 +59,5 @@ class Article
     {
         $this->content = $content;
     }
+
 }
