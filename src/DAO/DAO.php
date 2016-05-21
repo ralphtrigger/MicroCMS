@@ -15,8 +15,8 @@ use Doctrine\DBAL\Connection;
  *
  * @author trigger
  */
-abstract class DAO {
-
+abstract class DAO
+{
     /**
      * Database connection.
      * 
@@ -28,22 +28,24 @@ abstract class DAO {
      * 
      * @param \Doctrine\DBAL\Connection The database connection object.
      */
-    public function __construct(Connection $db) {
+    public function __construct(Connection $db)
+    {
         $this->db = $db;
     }
+
     /**
      * Grant access to the database connection object
      * 
      * @return \Doctrine\DBAL\Connection The database connection object.
      */
-    protected function getDb() {
+    protected function getDb()
+    {
         return $this->db;
     }
-    
+
     /**
      * Build a domain object from a DB row.
      * Must be overriden by child classes.
      */
     protected abstract function buildDomainObject($row);
-
 }

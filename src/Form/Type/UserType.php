@@ -23,23 +23,22 @@ class UserType extends AbstractType
         $builder
                 ->add('username', 'text')
                 ->add('password', 'repeated', array(
-                    'type' => 'password',
+                    'type'            => 'password',
                     'invalid_message' => 'The password fields must match.',
-                    'options' => array('required' => true),
-                    'first_options' => array('label' => 'Password'),
-                    'second_options' => array('label' => 'Repeat password'),
+                    'options'         => array('required' => true),
+                    'first_options'   => array('label' => 'Password'),
+                    'second_options'  => array('label' => 'Repeat password'),
                 ))
                 ->add('role', 'choice', array(
                     'choices' => array('ROLE_ADMIN' => 'Admin', 'ROLE_USER' => 'User'),
         ));
     }
-    
+
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'MicroCMS\Domain\User',
         ));
     }
-
 
 }
